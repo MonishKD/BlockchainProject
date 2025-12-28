@@ -1,3 +1,8 @@
+package src.functionalities;
+
+import src.FirstChain;
+import src.utils.StringUtil;
+
 import java.security.*;
 import java.util.ArrayList;
 
@@ -46,7 +51,7 @@ public class Transaction {
     public boolean processTransaction() {
 
         if(!verifySignature()) {
-            System.out.println("#Transaction Signature failed to verify");
+            System.out.println("#src.functionalities.Transaction Signature failed to verify");
             return false;
         }
 
@@ -57,7 +62,7 @@ public class Transaction {
 
         //check if transaction is valid:
         if(getInputsValue() < FirstChain.minimumTransaction) {
-            System.out.println("#Transaction Inputs to small: " + getInputsValue());
+            System.out.println("#src.functionalities.Transaction Inputs to small: " + getInputsValue());
             return false;
         }
 
@@ -74,7 +79,7 @@ public class Transaction {
 
         //remove transaction inputs from UTXO lists as spent:
         for(TransactionInput i : inputs) {
-            if(i.UTXO == null) continue; //if Transaction can't be found skip it
+            if(i.UTXO == null) continue; //if src.functionalities.Transaction can't be found skip it
             FirstChain.UTXOs.remove(i.UTXO.id);
         }
 
@@ -85,7 +90,7 @@ public class Transaction {
     public float getInputsValue() {
         float total = 0;
         for(TransactionInput i : inputs) {
-            if(i.UTXO == null) continue; //if Transaction can't be found skip it
+            if(i.UTXO == null) continue; //if src.functionalities.Transaction can't be found skip it
             total += i.UTXO.value;
         }
         return total;

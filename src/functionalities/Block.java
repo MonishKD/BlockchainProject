@@ -1,3 +1,7 @@
+package src.functionalities;
+
+import src.utils.StringUtil;
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -9,7 +13,7 @@ public class Block {
     private long timeStamp; // displayed in number of milliseconds
     private int nonce;
 
-    // Block Constructor.
+    // src.functionalities.Block Constructor.
     public Block(String previousHash ) {
         this.previousHash = previousHash;
         this.timeStamp = new Date().getTime();
@@ -30,7 +34,7 @@ public class Block {
             nonce++;
             hash = calculateHash();
         }
-        System.out.println("Block Mined!!! : " + hash);
+        System.out.println("src.functionalities.Block Mined!!! : " + hash);
     }
     //Add transactions to this block
     public boolean addTransaction(Transaction transaction) {
@@ -38,12 +42,12 @@ public class Block {
         if(transaction == null) return false;
         if((previousHash != "0")) {
             if((!transaction.processTransaction())) {
-                System.out.println("Transaction failed to process. Discarded.");
+                System.out.println("src.functionalities.Transaction failed to process. Discarded.");
                 return false;
             }
         }
         transactions.add(transaction);
-        System.out.println("Transaction Successfully added to Block");
+        System.out.println("src.functionalities.Transaction Successfully added to src.functionalities.Block");
         return true;
     }
 }

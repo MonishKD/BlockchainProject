@@ -1,3 +1,7 @@
+package src.utils;
+
+import src.functionalities.Transaction;
+
 import java.nio.charset.StandardCharsets;
 import java.security.*;
 import java.util.ArrayList;

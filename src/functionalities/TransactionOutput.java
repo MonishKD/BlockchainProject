@@ -1,3 +1,7 @@
+package src.functionalities;
+
+import src.utils.StringUtil;
+
 import java.security.PublicKey;
 
 public class TransactionOutput {
@@ -16,7 +20,7 @@ public class TransactionOutput {
 
     //Check if coin belongs to you
     public boolean isMine(PublicKey publicKey) {
-        return (publicKey == recipient);
+        return (publicKey.equals(recipient));
     }
 
 }

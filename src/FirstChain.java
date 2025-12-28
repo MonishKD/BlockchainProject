@@ -1,12 +1,15 @@
+package src;
+
 import java.security.Security;
 import java.util.ArrayList;
 import java.util.HashMap;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
+import src.functionalities.*;
 
 public class FirstChain {
 
     public static ArrayList<Block> blockchain = new ArrayList<Block>();
-    public static HashMap<String,TransactionOutput> UTXOs = new HashMap<String,TransactionOutput>();
+    public static HashMap<String, TransactionOutput> UTXOs = new HashMap<String, TransactionOutput>();
 
     public static int difficulty = 3;
     public static float minimumTransaction = 0.1f;
@@ -64,7 +67,7 @@ public class FirstChain {
         Block currentBlock;
         Block previousBlock;
         String hashTarget = new String(new char[difficulty]).replace('\0', '0');
-        HashMap<String,TransactionOutput> tempUTXOs = new HashMap<String,TransactionOutput>(); //a temporary working list of unspent transactions at a given block state.
+        HashMap<String, TransactionOutput> tempUTXOs = new HashMap<String, TransactionOutput>(); //a temporary working list of unspent transactions at a given block state.
         tempUTXOs.put(genesisTransaction.outputs.getFirst().id, genesisTransaction.outputs.getFirst());
 
         //loop through blockchain to check hashes:
@@ -94,11 +97,11 @@ public class FirstChain {
                 Transaction currentTransaction = currentBlock.transactions.get(t);
 
                 if(!currentTransaction.verifySignature()) {
-                    System.out.println("#Signature on Transaction(" + t + ") is Invalid");
+                    System.out.println("#Signature on src.functionalities.Transaction(" + t + ") is Invalid");
                     return;
                 }
                 if(currentTransaction.getInputsValue() != currentTransaction.getOutputsValue()) {
-                    System.out.println("#Inputs are note equal to outputs on Transaction(" + t + ")");
+                    System.out.println("#Inputs are note equal to outputs on src.functionalities.Transaction(" + t + ")");
                     return;
                 }
 
@@ -106,12 +109,12 @@ public class FirstChain {
                     tempOutput = tempUTXOs.get(input.transactionOutputId);
 
                     if(tempOutput == null) {
-                        System.out.println("#Referenced input on Transaction(" + t + ") is Missing");
+                        System.out.println("#Referenced input on src.functionalities.Transaction(" + t + ") is Missing");
                         return;
                     }
 
                     if(input.UTXO.value != tempOutput.value) {
-                        System.out.println("#Referenced input Transaction(" + t + ") value is Invalid");
+                        System.out.println("#Referenced input src.functionalities.Transaction(" + t + ") value is Invalid");
                         return;
                     }
 
@@ -123,11 +126,11 @@ public class FirstChain {
                 }
 
                 if( currentTransaction.outputs.get(0).recipient != currentTransaction.recipient) {
-                    System.out.println("#Transaction(" + t + ") output reciepient is not who it should be");
+                    System.out.println("#src.functionalities.Transaction(" + t + ") output reciepient is not who it should be");
                     return;
                 }
                 if( currentTransaction.outputs.get(1).recipient != currentTransaction.sender) {
-                    System.out.println("#Transaction(" + t + ") output 'change' is not sender.");
+                    System.out.println("#src.functionalities.Transaction(" + t + ") output 'change' is not sender.");
                     return;
                 }
 
